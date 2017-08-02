@@ -5,53 +5,98 @@ import {
   SkeletonCube,
   Background as CubeBackground
 } from './Cube.jsx';
-import animate from '../hocs/animate';
+import { animate, Container } from '../hocs/animate';
 
-const AnimatedIntroBackground = animate({
-  duration: [0, '100%'],
-  properties: {
-    opacity: [1, 0]
+const AnimatedIntroBackground = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      opacity: [1, 0]
+    }
   }
-})(IntroBackground);
+])(IntroBackground);
 
-const AnimatedTitle = animate({
-  duration: [0, '80%'],
-  properties: {
-    opacity: [1, 0],
-    translateY: [0, '-50%']
+const AnimatedTitle = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      letterSpacing: [10, 72],
+      opacity: [1, 0]
+    }
   }
-})(Title);
+])(Title);
 
-const AnimatedCubeBackground = animate({
-  duration: ['100%', '200%'],
-  properties: {
-    skewY: [0, -40],
-    translateY: [0, '-100%']
+const AnimatedCubeBackground = animate([
+  {
+    duration: [0, '100%'],
+    properties: {}
+  },
+  {
+    duration: ['100%', '200%'],
+    properties: {
+      skewY: [0, -20],
+      translateY: [0, '-140%']
+    }
   }
-})(CubeBackground);
+])(CubeBackground);
 
-const AnimatedCube = animate({
-  duration: ['100%', '200%'],
-  properties: {
-    skewY: [0, 40],
-    translateY: [0, '100%']
+const AnimatedCube = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      translateY: ['25%', 0],
+      scaleX: [0.7, 1],
+      scaleY: [0.7, 1]
+    }
+  },
+  {
+    duration: ['100%', '200%'],
+    properties: {
+      skewY: [0, 20],
+      translateY: [0, '140%']
+    }
   }
-})(ColorCube);
+])(ColorCube);
+
+const AnimatedCubeBackground1 = animate([
+  {
+    duration: [0, '200%'],
+    properties: {}
+  }
+])(CubeBackground);
+
+const AnimatedCube1 = animate([
+  {
+    duration: [0, '200%'],
+    properties: {}
+  }
+])(SkeletonCube);
 
 class App extends Component {
   render() {
     return (
       <main>
         <section>
-          <AnimatedIntroBackground />
-          <AnimatedTitle />
-          {/* <Author /> */}
+          <Container
+            style={{
+              position: 'fixed',
+              top: '30%',
+              left: '50%',
+              width: 1000,
+              height: 75,
+              marginLeft: -500,
+              textAlign: 'center',
+              zIndex: 10
+            }}
+          >
+            <AnimatedTitle />
+          </Container>
         </section>
         <section>
-          {/* <CubeBackground style={{ background: '#373d29' }}>
-            <SkeletonCube />
-          </CubeBackground> */}
-          <AnimatedCubeBackground style={{ background: '#373d29' }}>
+          <AnimatedCubeBackground1 style={{ background: '#373d29' }}>
+            <AnimatedCube1 />
+          </AnimatedCubeBackground1>
+          <AnimatedCubeBackground>
             <AnimatedCube />
           </AnimatedCubeBackground>
         </section>
@@ -61,53 +106,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import Title from './Title';
-// import Background from './Background';
-// import Cube from './Cube';
-
-// const AnimatedBackground = animate({
-//   duration: [0, '100%'],
-//   properties: {
-//     skewY: [0, -40],
-//     translateY: [0, '-100%']
-//   }
-// })(Background);
-
-// const AnimatedTitle = animate({
-//   duration: [0, '100%'],
-//   properties: {
-//     skewY: [0, 40],
-//     translateY: [0, '100%']
-//   }
-// })(Title);
-
-/*
-<AnimatedBackground
-          style={{
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-
-            transformOrigin: 'bottom left',
-            overflow: 'hidden'
-          }}
-        >
-          <AnimatedCube cubeClass="cube grey" />
-        </AnimatedBackground>
-        <Cube cubeClass="cube" style={{zIndex: -1}} />
-         <Title style={{ color: '#EEE', zIndex: -1 }} />
-         <AnimatedBackground
-          style={{
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-            background: '#FDEF52',
-            transformOrigin: 'bottom left',
-            overflow: 'hidden'
-          }}
-        >
-          <AnimatedTitle />
-        </AnimatedBackground>
-        <Title style={{ color: '#EEE', zIndex: -1 }} />
-        */

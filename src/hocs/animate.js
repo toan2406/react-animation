@@ -1,94 +1,93 @@
 import React, { Component } from 'react';
-import { mapObject } from '../utils';
+import { mapObject, first, last, easingFunctions } from '../utils';
 
 const WINDOW_WIDTH = window.innerWidth;
 const WINDOW_HEIGHT = window.innerHeight;
+const HIDDEN = { display: 'none' };
 
-const animate = keyframe => BaseComponent =>
+const animate = keyframes => BaseComponent =>
   class extends Component {
     constructor(props) {
       super(props);
 
-      this._duration = convertDurationToPx(keyframe.duration, WINDOW_HEIGHT);
-      this._properties = convertPropsToPx(
-        keyframe.properties,
-        WINDOW_HEIGHT,
-        WINDOW_WIDTH
-      );
+      this._keyframes = keyframes.map(keyframe => ({
+        duration: convertDurationToPx(
+          keyframe.duration,
+          WINDOW_HEIGHT,
+          WINDOW_WIDTH
+        ),
+        properties: convertPropsToPx(
+          keyframe.properties,
+          WINDOW_HEIGHT,
+          WINDOW_WIDTH
+        )
+      }));
 
       this.state = {
         scrollTop: document.body.scrollTop
       };
     }
 
-    shouldComponentUpdate = (nextProps, nextState) =>
-      nextState.scrollTop !== this.state.scrollTop;
+    shouldComponentUpdate(nextProps, nextState) {
+      return nextState.scrollTop !== this.state.scrollTop;
+    }
 
     componentDidMount() {
       window.requestAnimationFrame(() =>
-        draw(() => {
+        draw(() =>
           this.setState({
             scrollTop: document.body.scrollTop
-          });
-        })
+          })
+        )
       );
     }
 
     calculateProps = () => {
       const scrollTop = this.state.scrollTop;
-      const [start, end] = this._duration;
+      const start = first(this._keyframes).duration[0];
+      const end = last(this._keyframes).duration[1];
+      let defaultProps = {
+        transform: '',
+        opacity: ''
+      };
 
-      if (scrollTop < start || scrollTop > end) {
-        return { display: 'none' };
-      }
+      if (scrollTop < start || scrollTop > end) return HIDDEN;
 
-      const percentage = (scrollTop - start) / (end - start);
-
-      return Object.keys(this._properties).reduce(
-        (r, k) => {
-          const vals = this._properties[k];
-          const newVal = percentage * (vals[1] - vals[0]) + vals[0];
-          switch (k) {
-            case 'translateX':
-            case 'translateY':
-              r.transform += `${k}(${newVal}px)`;
-              break;
-            case 'skewX':
-            case 'skewY':
-            case 'rotate':
-              r.transform += `${k}(${newVal}deg)`;
-              break;
-            case 'opacity':
-              r.opacity = newVal;
-          }
-          return r;
-        },
-        {
-          transform: '',
-          opacity: ''
-        }
+      return this._keyframes.reduce(
+        (result, keyframe) => composeProps(scrollTop, keyframe, result),
+        defaultProps
       );
     };
 
     render() {
       const { style, ...other } = this.props;
+      const animatedStyle = this.calculateProps();
       return (
         <BaseComponent
           {...other}
           style={{
             ...style,
-            ...this.calculateProps()
+            ...animatedStyle
           }}
         />
       );
     }
   };
 
+/**
+ * draw
+ * @param {*} func
+ */
 const draw = func => {
   window.requestAnimationFrame(draw.bind(null, func));
   func();
 };
 
+/**
+ * convertPercentToPx
+ * @param {*} value
+ * @param {*} lengthInPx
+ */
 const convertPercentToPx = (value, lengthInPx) => {
   if (typeof value === 'string' && value.match(/%/g)) {
     return parseFloat(value) / 100 * lengthInPx;
@@ -96,9 +95,21 @@ const convertPercentToPx = (value, lengthInPx) => {
   return value;
 };
 
-const convertDurationToPx = (duration, height) =>
+/**
+ * convertDurationToPx
+ * @param {*} duration
+ * @param {*} height
+ * @param {*} width
+ */
+const convertDurationToPx = (duration, height, width) =>
   duration.map(v => convertPercentToPx(v, height));
 
+/**
+ * convertPropsToPx
+ * @param {*} props
+ * @param {*} height
+ * @param {*} width
+ */
 const convertPropsToPx = (props, height, width) =>
   mapObject(props, (vals, prop) => {
     switch (prop) {
@@ -111,4 +122,67 @@ const convertPropsToPx = (props, height, width) =>
     }
   });
 
-export default animate;
+/**
+ * calculatePercentage
+ * @param {*} scrollTop
+ * @param {*} start
+ * @param {*} end
+ */
+const calculatePercentage = (scrollTop, start, end) =>
+  (scrollTop - start) / (end - start);
+
+/**
+ * calculatePropValue
+ * @param {*} percentage
+ * @param {*} from
+ * @param {*} to
+ */
+const calculatePropValue = (percentage, from, to) =>
+  percentage * (to - from) + from;
+
+/**
+ * composeProps
+ * @param {*} scrollTop
+ * @param {*} keyframe
+ * @param {*} props
+ */
+const composeProps = (scrollTop, keyframe, props) => {
+  let percentage = calculatePercentage(scrollTop, ...keyframe.duration);
+
+  if (percentage < 0 || percentage > 1) return props;
+
+  percentage = easingFunctions.easeInOutQuad(percentage);
+
+  return Object.keys(keyframe.properties).reduce((result, prop) => {
+    const values = keyframe.properties[prop];
+    const newValue = calculatePropValue(percentage, ...values);
+
+    switch (prop) {
+      case 'translateX':
+      case 'translateY':
+        result.transform += `${prop}(${newValue}px)`;
+        break;
+
+      case 'skewX':
+      case 'skewY':
+      case 'rotate':
+        result.transform += `${prop}(${newValue}deg)`;
+        break;
+
+      case 'scaleX':
+      case 'scaleY':
+        result.transform += `${prop}(${newValue})`;
+        break;
+
+      default:
+        result[prop] = newValue;
+    }
+
+    return result;
+  }, props);
+};
+
+const Container = ({ style, ...other }) =>
+  <div {...other} style={{ ...style, contain: 'strict' }} />;
+
+export { animate, Container };

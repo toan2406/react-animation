@@ -8,7 +8,8 @@
   width: 100%;
   height: 100%;
   perspective: 99999px;
-  transform-origin: bottom left;
+  transform-origin: center;
+  /* transform-origin: bottom left; */
 }
 
 .cube-background {
@@ -19,40 +20,41 @@
   height: 100%;
   background: #dee5e1;
   overflow: hidden;
-  transform-origin: bottom left;
+  transform-origin: center;
+  /* transform-origin: bottom left; */
 }
 
 .cube {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   transform-style: preserve-3d;
   animation: rotate 15s linear infinite;
 }
 
 .cube > .side {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 
 .side.front {
-  transform: translateZ(100px);
+  transform: translateZ(90px);
 }
 .side.back {
-  transform: translateZ(-100px);
+  transform: translateZ(-90px);
 }
 .side.top {
-  transform: translateY(-100px) rotateX(90deg);
+  transform: translateY(-90px) rotateX(90deg);
 }
 .side.bottom {
-  transform: translateY(100px) rotateX(90deg);
+  transform: translateY(90px) rotateX(90deg);
 }
 .side.right {
-  transform: translateX(100px) rotateY(90deg);
+  transform: translateX(90px) rotateY(90deg);
 }
 .side.left {
-  transform: translateX(-100px) rotateY(90deg);
+  transform: translateX(-90px) rotateY(90deg);
 }
 
 .color > .front,
@@ -76,8 +78,8 @@
 
 .center {
   position: absolute;
-  top: 75px;
-  left: 75px;
+  top: 65px;
+  left: 65px;
   width: 50px;
   height: 50px;
   border-radius: 50% 50%;

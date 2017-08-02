@@ -8,33 +8,9 @@
 }
 
 .intro-title {
-  position: fixed;
-  top: 30%;
-  width: 100%;
-  font-family: 'Roboto', sans-serif;
-  font-size: 2.5em;
-  text-align: center;
-}
-
-.intro-title > * {
   margin: 0;
-  line-height: 1;
-}
-
-.intro-title > .animation,
-.intro-title > .react {
-  padding-left: 0.12em;
-  letter-spacing: 0.12em;
-}
-
-.intro-title > .react,
-.intro-title > .in {
-  display: inline;
-}
-
-.intro-title > .in {
-  margin-right: 0.5em;
-  opacity: 0.4;
+  font-family: 'Roboto', sans-serif;
+  font-size: 4em;
 }
 
 .intro-author {
