@@ -1,108 +1,92 @@
 import React, { Component } from 'react';
-import { Title, Author, Background as IntroBackground } from './Intro.jsx';
-import {
-  ColorCube,
-  SkeletonCube,
-  Background as CubeBackground
-} from './Cube.jsx';
-import { animate, Container } from '../hocs/animate';
-
-const AnimatedIntroBackground = animate([
-  {
-    duration: [0, '100%'],
-    properties: {
-      opacity: [1, 0]
-    }
-  }
-])(IntroBackground);
-
-const AnimatedTitle = animate([
-  {
-    duration: [0, '100%'],
-    properties: {
-      letterSpacing: [10, 72],
-      opacity: [1, 0]
-    }
-  }
-])(Title);
-
-const AnimatedCubeBackground = animate([
-  {
-    duration: [0, '100%'],
-    properties: {}
-  },
-  {
-    duration: ['100%', '200%'],
-    properties: {
-      skewY: [0, -20],
-      translateY: [0, '-140%']
-    }
-  }
-])(CubeBackground);
-
-const AnimatedCube = animate([
-  {
-    duration: [0, '100%'],
-    properties: {
-      translateY: ['25%', 0],
-      scaleX: [0.7, 1],
-      scaleY: [0.7, 1]
-    }
-  },
-  {
-    duration: ['100%', '200%'],
-    properties: {
-      skewY: [0, 20],
-      translateY: [0, '140%']
-    }
-  }
-])(ColorCube);
-
-const AnimatedCubeBackground1 = animate([
-  {
-    duration: [0, '200%'],
-    properties: {}
-  }
-])(CubeBackground);
-
-const AnimatedCube1 = animate([
-  {
-    duration: [0, '200%'],
-    properties: {}
-  }
-])(SkeletonCube);
+import { Title } from './Intro.jsx';
+import { Cube, Background } from './Cube.jsx';
+import { animate } from '../hocs/animate';
 
 class App extends Component {
   render() {
     return (
       <main>
         <section>
-          <Container
-            style={{
-              position: 'fixed',
-              top: '30%',
-              left: '50%',
-              width: 1000,
-              height: 75,
-              marginLeft: -500,
-              textAlign: 'center',
-              zIndex: 10
-            }}
-          >
-            <AnimatedTitle />
-          </Container>
+          <AnimatedTitle1 style={{ color: 'rgba(255, 0, 0, .75)' }} />
+          <AnimatedTitle2 style={{ color: 'rgba(0, 0, 255, .75)' }} />
         </section>
+
         <section>
-          <AnimatedCubeBackground1 style={{ background: '#373d29' }}>
-            <AnimatedCube1 />
-          </AnimatedCubeBackground1>
-          <AnimatedCubeBackground>
-            <AnimatedCube />
-          </AnimatedCubeBackground>
+          <AnimatedBackground2 style={{ background: 'black' }}>
+            <AnimatedCube2 type="skeleton" />
+          </AnimatedBackground2>
+          <AnimatedBackground1 style={{ background: 'white' }}>
+            <AnimatedCube1 type="solid" />
+          </AnimatedBackground1>
         </section>
       </main>
     );
   }
 }
+
+const AnimatedTitle1 = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      letterSpacing: [5, 70],
+      opacity: [1, 0]
+    }
+  }
+])(Title);
+
+const AnimatedTitle2 = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      letterSpacing: [8, 80],
+      opacity: [1, 0]
+    }
+  }
+])(Title);
+
+const AnimatedBackground1 = animate([
+  {
+    duration: ['50%', '100%'],
+    properties: {}
+  },
+  {
+    duration: ['100%', '200%'],
+    properties: {
+      skewY: [0, -20],
+      translateY: [0, '-100%']
+    }
+  }
+])(Background);
+
+const AnimatedCube1 = animate([
+  {
+    duration: ['50%', '100%'],
+    properties: {
+      translateY: ['100%', 0]
+    }
+  },
+  {
+    duration: ['100%', '200%'],
+    properties: {
+      skewY: [0, 20],
+      translateY: [0, '100%']
+    }
+  }
+])(Cube);
+
+const AnimatedBackground2 = animate([
+  {
+    duration: ['50%', '200%'],
+    properties: {}
+  }
+])(Background);
+
+const AnimatedCube2 = animate([
+  {
+    duration: ['50%', '200%'],
+    properties: {}
+  }
+])(Cube);
 
 export default App;

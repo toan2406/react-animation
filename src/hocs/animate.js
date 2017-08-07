@@ -3,7 +3,7 @@ import { mapObject, first, last, easingFunctions } from '../utils';
 
 const WINDOW_WIDTH = window.innerWidth;
 const WINDOW_HEIGHT = window.innerHeight;
-const HIDDEN = { display: 'none' };
+const HIDDEN = { opacity: 0, pointerEvents: 'none' };
 
 const animate = keyframes => BaseComponent =>
   class extends Component {
@@ -42,7 +42,7 @@ const animate = keyframes => BaseComponent =>
       );
     }
 
-    calculateProps = () => {
+    calculateProps() {
       const scrollTop = this.state.scrollTop;
       const start = first(this._keyframes).duration[0];
       const end = last(this._keyframes).duration[1];
@@ -57,20 +57,18 @@ const animate = keyframes => BaseComponent =>
         (result, keyframe) => composeProps(scrollTop, keyframe, result),
         defaultProps
       );
-    };
+    }
 
     render() {
       const { style, ...other } = this.props;
       const animatedStyle = this.calculateProps();
-      return (
-        <BaseComponent
-          {...other}
-          style={{
-            ...style,
-            ...animatedStyle
-          }}
-        />
-      );
+      return BaseComponent({
+        ...other,
+        style: {
+          ...style,
+          ...animatedStyle
+        }
+      });
     }
   };
 

@@ -8,8 +8,63 @@
   width: 100%;
   height: 100%;
   perspective: 99999px;
-  transform-origin: center;
-  /* transform-origin: bottom left; */
+  transform-origin: bottom left;
+}
+
+.cube {
+  position: relative;
+  width: 26vmin;
+  height: 26vmin;
+  transform-style: preserve-3d;
+  animation: rotate 15s linear infinite;
+}
+
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.side.front {
+  transform: rotateY(-90deg) translateX(50%) rotateY(90deg);
+}
+.side.back {
+  transform: rotateY(-90deg) translateX(-50%) rotateY(90deg);
+}
+.side.top {
+  transform: translateY(-50%) rotateX(90deg);
+}
+.side.bottom {
+  transform: translateY(50%) rotateX(90deg);
+}
+.side.left {
+  transform: translateX(-50%) rotateY(90deg);
+}
+.side.right {
+  transform: translateX(50%) rotateY(90deg);
+}
+
+.solid > .front {
+  background: royalblue;
+}
+.solid > .back {
+  background: dodgerblue;
+}
+.solid > .top {
+  background: gold;
+}
+.solid > .bottom {
+  background: orange;
+}
+.solid > .left {
+  background: darkorchid;
+}
+.solid > .right {
+  background: deeppink;
+}
+
+.skeleton > .side {
+  border: solid thin silver;
 }
 
 .cube-background {
@@ -18,73 +73,25 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #dee5e1;
   overflow: hidden;
-  transform-origin: center;
-  /* transform-origin: bottom left; */
-}
-
-.cube {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  transform-style: preserve-3d;
-  animation: rotate 15s linear infinite;
-}
-
-.cube > .side {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-}
-
-.side.front {
-  transform: translateZ(90px);
-}
-.side.back {
-  transform: translateZ(-90px);
-}
-.side.top {
-  transform: translateY(-90px) rotateX(90deg);
-}
-.side.bottom {
-  transform: translateY(90px) rotateX(90deg);
-}
-.side.right {
-  transform: translateX(90px) rotateY(90deg);
-}
-.side.left {
-  transform: translateX(-90px) rotateY(90deg);
-}
-
-.color > .front,
-.color > .back {
-  background: #fb4e9b;
-}
-
-.color > .top,
-.color > .bottom {
-  background: #9448e4;
-}
-
-.color > .left,
-.color > .right {
-  background: #ff9557;
-}
-
-.skeleton > .side {
-  border: solid thin #999;
+  transform-origin: bottom left;
 }
 
 .center {
   position: absolute;
-  top: 65px;
-  left: 65px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50% 50%;
-  background: radial-gradient(circle at 15px 15px, #ef5443, #c83c30);
+  top: 50%;
+  left: 50%;
+  width: 8vmin;
+  height: 8vmin;
+  margin-top: -4vmin;
+  margin-left: -4vmin;
+  background: red;
+  border-radius: 51% 51%;
   animation: reverse-rotate 15s linear infinite;
+}
+
+.solid > .center {
+  display: none;
 }
 
 @keyframes rotate {

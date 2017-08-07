@@ -1,9 +1,9 @@
 import React from 'react';
 import './cube.css';
 
-const Cube = ({ style, className = 'cube' }) =>
+const Cube = ({ type, style }) =>
   <div className="cube-wrapper" style={style}>
-    <div className={className}>
+    <div className={`cube ${type}`}>
       <div className="center" />
       <div className="side front" />
       <div className="side back" />
@@ -14,12 +14,7 @@ const Cube = ({ style, className = 'cube' }) =>
     </div>
   </div>;
 
-const ColorCube = ({ style }) => <Cube className="cube color" style={style} />;
-
-const SkeletonCube = ({ style }) =>
-  <Cube className="cube skeleton" style={style} />;
-
 const Background = ({ children, style }) =>
-  <div className="cube-background" children={children} style={style} />;
+  <div className="cube-background" style={style} children={children} />;
 
-export { Cube, ColorCube, SkeletonCube, Background };
+export { Cube, Background };

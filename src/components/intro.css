@@ -1,25 +1,18 @@
-.intro-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ffe529;
-}
-
 .intro-title {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  font-size: 4em;
-}
-
-.intro-author {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.75em;
+  top: 40%;
+  left: 50%;
+
+  width: 200%;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -100%;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 12vmin;
   text-align: center;
-  letter-spacing: .15em;
-  border-top: dashed thin rgba(0, 0, 0, .2);
+
+  mix-blend-mode: multiply;
+
+  z-index: 1;
 }
