@@ -16,3 +16,8 @@
 
   z-index: 1;
 }
+
+.intro-text {
+  position: fixed;
+  text-align: center;
+}

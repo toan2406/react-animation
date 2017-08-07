@@ -48,23 +48,23 @@
   background: royalblue;
 }
 .solid > .back {
-  background: dodgerblue;
+  background: royalblue;
 }
 .solid > .top {
-  background: gold;
+  background: deepskyblue;
 }
 .solid > .bottom {
-  background: orange;
+  background: deepskyblue;
 }
 .solid > .left {
-  background: darkorchid;
+  background: midnightblue;
 }
 .solid > .right {
-  background: deeppink;
+  background: midnightblue;
 }
 
 .skeleton > .side {
-  border: solid thin silver;
+  border: solid thin darkcyan;
 }
 
 .cube-background {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Title } from './Intro.jsx';
+import { Title, Text } from './Intro.jsx';
 import { Cube, Background } from './Cube.jsx';
+import { Circle, Triangle, Rectangle, Hexagon } from './Shapes.jsx';
 import { animate } from '../hocs/animate';
 
 class App extends Component {
@@ -8,15 +9,21 @@ class App extends Component {
     return (
       <main>
         <section>
-          <AnimatedTitle1 style={{ color: 'rgba(255, 0, 0, .75)' }} />
-          <AnimatedTitle2 style={{ color: 'rgba(0, 0, 255, .75)' }} />
+          <AnimatedTitle1 style={{ color: 'rgba(255, 0, 255, .75)' }} />
+          <AnimatedTitle2 style={{ color: 'rgba(0, 255, 255, .75)' }} />
+          <AnimatedText1 style={{ bottom: 10, width: '100%', zIndex: 10 }}>
+            Explore<br />↓
+          </AnimatedText1>
         </section>
 
         <section>
-          <AnimatedBackground2 style={{ background: 'seashell' }}>
+          <AnimatedBackground2 style={{ background: 'lightcyan' }}>
             <AnimatedCube2 type="skeleton" />
           </AnimatedBackground2>
-          <AnimatedBackground1 style={{ background: 'white' }}>
+          <AnimatedText2 style={{ bottom: '20%', width: '100%' }}>
+            Dogs are better than cats
+          </AnimatedText2>
+          <AnimatedBackground1 style={{ background: 'ghostwhite' }}>
             <AnimatedCube1 type="solid" />
           </AnimatedBackground1>
         </section>
@@ -24,6 +31,15 @@ class App extends Component {
     );
   }
 }
+
+const AnimatedText1 = animate([
+  {
+    duration: [0, '100%'],
+    properties: {
+      opacity: [1, 0]
+    }
+  }
+])(Text);
 
 const AnimatedTitle1 = animate([
   {
@@ -96,5 +112,20 @@ const AnimatedCube2 = animate([
     }
   }
 ])(Cube);
+
+const AnimatedText2 = animate([
+  {
+    duration: ['100%', '210%'],
+    properties: {
+      translateY: [0, '-10%']
+    }
+  },
+  {
+    duration: ['210%', '250%'],
+    properties: {
+      translateY: ['-10%', '-100%']
+    }
+  }
+])(Text);
 
 export default App;

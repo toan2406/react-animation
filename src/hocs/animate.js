@@ -29,7 +29,14 @@ const animate = keyframes => BaseComponent =>
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return nextState.scrollTop !== this.state.scrollTop;
+      const thisScrollTop = this.state.scrollTop;
+      const start = first(this._keyframes).duration[0];
+      const end = last(this._keyframes).duration[1];
+      return (
+        nextState.scrollTop !== thisScrollTop &&
+        thisScrollTop >= start &&
+        thisScrollTop < end
+      );
     }
 
     componentDidMount() {
