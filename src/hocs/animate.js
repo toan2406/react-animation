@@ -51,7 +51,7 @@ const animate = keyframes => BaseComponent =>
         opacity: ''
       };
 
-      if (scrollTop < start || scrollTop > end) return HIDDEN;
+      if (scrollTop < start || scrollTop >= end) return HIDDEN;
 
       return this._keyframes.reduce(
         (result, keyframe) => composeProps(scrollTop, keyframe, result),
@@ -145,10 +145,11 @@ const calculatePropValue = (percentage, from, to) =>
  * @param {*} props
  */
 const composeProps = (scrollTop, keyframe, props) => {
-  let percentage = calculatePercentage(scrollTop, ...keyframe.duration);
+  const [start, end] = keyframe.duration;
 
-  if (percentage < 0 || percentage > 1) return props;
+  if (scrollTop < start || scrollTop >= end) return props;
 
+  let percentage = calculatePercentage(scrollTop, start, end);
   percentage = easingFunctions.easeInOutQuad(percentage);
 
   return Object.keys(keyframe.properties).reduce((result, prop) => {

@@ -13,7 +13,7 @@ class App extends Component {
         </section>
 
         <section>
-          <AnimatedBackground2 style={{ background: 'black' }}>
+          <AnimatedBackground2 style={{ background: 'seashell' }}>
             <AnimatedCube2 type="skeleton" />
           </AnimatedBackground2>
           <AnimatedBackground1 style={{ background: 'white' }}>
@@ -70,22 +70,30 @@ const AnimatedCube1 = animate([
     duration: ['100%', '200%'],
     properties: {
       skewY: [0, 20],
-      translateY: [0, '100%']
+      translateY: [0, '90%']
     }
   }
 ])(Cube);
 
 const AnimatedBackground2 = animate([
   {
-    duration: ['50%', '200%'],
+    duration: ['100%', '250%'],
     properties: {}
   }
 ])(Background);
 
 const AnimatedCube2 = animate([
   {
-    duration: ['50%', '200%'],
-    properties: {}
+    duration: ['100%', '200%'],
+    properties: {
+      translateY: [0, '-10%']
+    }
+  },
+  {
+    duration: ['200%', '250%'],
+    properties: {
+      translateY: ['-10%', '-100%']
+    }
   }
 ])(Cube);
 
