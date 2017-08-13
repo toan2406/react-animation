@@ -166,6 +166,7 @@ const composeProps = (scrollTop, keyframe, props) => {
     switch (prop) {
       case 'translateX':
       case 'translateY':
+      case 'translateZ':
         result.transform += `${prop}(${newValue}px)`;
         break;
 

@@ -1,0 +1,23 @@
+.shapes-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  width: 60vmin;
+  height: 60vmin;
+  margin-top: -30vmin;
+  margin-left: -30vmin;
+
+  perspective: 399;
+}
+
+.shape {
+  width: 14vmin;
+  height: 14vmin;
+  margin: 3vmin;
+}
