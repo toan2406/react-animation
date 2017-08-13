@@ -20,7 +20,4 @@ const Cube = ({ type, style }) =>
     </div>
   </div>;
 
-const Background = ({ children, style }) =>
-  <div className="cube-background" style={style} children={children} />;
-
-export { Cube, Background };
+export { Cube };

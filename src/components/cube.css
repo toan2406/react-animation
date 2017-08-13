@@ -30,7 +30,7 @@
   left: 40%;
   width: 20%;
   height: 20%;
-  background: red;
+  background: deeppink;
   border: none !important;
 }
 
@@ -73,17 +73,7 @@
 }
 
 .skeleton > .side {
-  border: solid thin darkcyan;
-}
-
-.cube-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  transform-origin: bottom left;
+  border: solid thin steelblue;
 }
 
 @keyframes rotate {

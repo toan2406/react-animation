@@ -5,8 +5,10 @@ const mapObject = (obj, cb) =>
   }, {});
 
 const first = arr => arr[0];
-
 const last = arr => arr[arr.length - 1];
+
+const getWindowWidth = () => window.innerWidth;
+const getWindowHeight = () => window.innerHeight;
 
 // https://gist.github.com/gre/1650294
 const easingFunctions = {
@@ -51,4 +53,11 @@ const easingFunctions = {
   }
 };
 
-export { mapObject, first, last, easingFunctions };
+export {
+  mapObject,
+  first,
+  last,
+  getWindowWidth,
+  getWindowHeight,
+  easingFunctions
+};

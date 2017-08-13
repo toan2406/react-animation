@@ -6,7 +6,4 @@ const Title = ({ style }) =>
     RE-LLAX
   </h1>;
 
-const Text = ({ style, children }) =>
-  <div className="intro-text" style={style} children={children} />;
-
-export { Title, Text };
+export { Title };

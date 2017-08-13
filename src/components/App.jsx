@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Title, Text } from './Intro.jsx';
-import { Cube, Background } from './Cube.jsx';
-import {
-  Circle,
-  Triangle,
-  Square,
-  Container as ShapesContainer
-} from './Shapes.jsx';
+import Text from './Text.jsx';
+import Background from './Background.jsx';
+import { Title } from './Intro.jsx';
+import { Cube } from './Cube.jsx';
+import { Circle, Triangle, Square, Container as ShapesContainer } from './Shapes.jsx';
+import { Loader, getLoaderLength } from './Loader.jsx';
 import { animate } from '../hocs/animate';
+
+const loaderLength = getLoaderLength();
 
 class App extends Component {
   render() {
@@ -16,16 +16,14 @@ class App extends Component {
         <section>
           <AnimatedTitle1 style={{ color: 'rgba(255, 0, 255, .9)' }} />
           <AnimatedTitle2 style={{ color: 'rgba(0, 255, 255, .9)' }} />
-          <AnimatedText1 style={{ bottom: 10, width: '100%', zIndex: 1 }}>
+          <AnimatedText1 style={{ bottom: 20, width: '100%', zIndex: 1 }}>
             Explore<br />↓
           </AnimatedText1>
         </section>
 
         <section>
-          <AnimatedBackground2 style={{ background: 'lightcyan' }}>
-            <AnimatedCube2 type="skeleton" />
-          </AnimatedBackground2>
-          <AnimatedBackground1 style={{ background: 'ghostwhite' }}>
+          <AnimatedCube2 type="skeleton" />
+          <AnimatedBackground1 style={{ transformOrigin: 'bottom left' }}>
             <AnimatedCube1 type="solid" />
           </AnimatedBackground1>
         </section>
@@ -43,6 +41,16 @@ class App extends Component {
             <AnimatedTriangle3 color="blue" />
           </ShapesContainer>
         </section>
+
+        <section>
+          <AnimatedText2 style={{ top: '40%', width: '100%' }}>
+            View slide at
+            <br />
+            <a href="https://goo.gl/3VCPTh">https://goo.gl/3VCPTh</a>
+          </AnimatedText2>
+        </section>
+
+        <AnimatedLoader />
       </main>
     );
   }
@@ -114,13 +122,6 @@ const AnimatedCube1 = animate([
     }
   }
 ])(Cube);
-
-const AnimatedBackground2 = animate([
-  {
-    duration: ['100%', '335%'],
-    properties: {}
-  }
-])(Background);
 
 const AnimatedCube2 = animate([
   {
@@ -329,5 +330,35 @@ const AnimatedTriangle3 = animate([
     }
   }
 ])(Triangle);
+
+// =====================================================================
+// LOADER
+// =====================================================================
+
+const AnimatedLoader = animate([
+  {
+    duration: [0, '400%'],
+    properties: {
+      strokeDashoffset: [loaderLength, 0]
+    }
+  },
+  {
+    duration: ['400%', '500%'],
+    properties: {}
+  }
+])(Loader);
+
+const AnimatedText2 = animate([
+  {
+    duration: ['335%', '400%'],
+    properties: {
+      translateY: ['100%', 0]
+    }
+  },
+  {
+    duration: ['400%', '500%'],
+    properties: {}
+  }
+])(Text);
 
 export default App;
