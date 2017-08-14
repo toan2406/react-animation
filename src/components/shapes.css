@@ -20,4 +20,5 @@
   width: 14vmin;
   height: 14vmin;
   margin: 3vmin;
+  will-change: transform;
 }

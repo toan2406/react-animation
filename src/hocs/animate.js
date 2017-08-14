@@ -4,6 +4,7 @@ import { mapObject, first, last, easingFunctions } from '../utils';
 const WINDOW_WIDTH = window.innerWidth;
 const WINDOW_HEIGHT = window.innerHeight;
 const HIDDEN = { opacity: 0, pointerEvents: 'none' };
+// const HIDDEN = { display: 'none' };
 
 const animate = keyframes => BaseComponent =>
   class extends Component {
