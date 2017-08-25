@@ -8,7 +8,7 @@ const first = arr => arr[0];
 const last = arr => arr[arr.length - 1];
 
 const getWindowWidth = () => window.innerWidth;
-const getWindowHeight = () => window.innerHeight;
+const getWindowHeight = () => window.innerHeight + 60;
 
 // https://gist.github.com/gre/1650294
 const easingFunctions = {

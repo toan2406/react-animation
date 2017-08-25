@@ -1,7 +1,7 @@
 .shapes-container {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
 
   display: flex;
   flex-wrap: wrap;

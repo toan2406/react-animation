@@ -1,12 +1,12 @@
 .intro-title {
   position: fixed;
-  top: 40%;
-  left: 50%;
+  top: 40vh;
+  left: 50vw;
 
-  width: 400%;
+  width: 400vw;
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: -200%;
+  margin-left: -200vw;
 
   font-family: 'Roboto', sans-serif;
   font-size: 12vmin;
