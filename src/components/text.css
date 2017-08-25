@@ -1,4 +1,5 @@
 .text {
   position: fixed;
   text-align: center;
+  will-change: transform;
 }

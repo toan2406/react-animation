@@ -15,4 +15,6 @@
   mix-blend-mode: multiply;
 
   z-index: 1;
+
+  will-change: opacity;
 }

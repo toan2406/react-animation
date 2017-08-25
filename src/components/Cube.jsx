@@ -1,8 +1,8 @@
 import React from 'react';
 import './cube.css';
 
-const Cube = ({ type, style }) =>
-  <div className="cube-wrapper" style={style}>
+const Cube = ({ type, style, refFunc }) =>
+  <div className="cube-wrapper" style={style} ref={refFunc}>
     <div className={`cube ${type}`}>
       <div className="center side front" />
       <div className="center side back" />

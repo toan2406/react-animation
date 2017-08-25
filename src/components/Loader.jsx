@@ -10,10 +10,15 @@ const getLoaderLength = () => {
 
 const loaderLength = getLoaderLength();
 
-const Loader = ({ style }) =>
+const Loader = ({ style, refFunc }) =>
   <div className="loader-wrapper">
     <svg width="100%" height="100%">
-      <rect className="loader" strokeDasharray={loaderLength} style={style} />
+      <rect
+        className="loader"
+        strokeDasharray={loaderLength}
+        style={style}
+        ref={refFunc}
+      />
     </svg>
   </div>;
 

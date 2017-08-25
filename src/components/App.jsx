@@ -13,6 +13,8 @@ class App extends Component {
   render() {
     return (
       <main>
+        <AnimatedLoader />
+
         <section>
           <AnimatedTitle1 style={{ color: 'rgba(255, 0, 255, .9)' }} />
           <AnimatedTitle2 style={{ color: 'rgba(0, 255, 255, .9)' }} />
@@ -49,8 +51,6 @@ class App extends Component {
             <a href="https://goo.gl/3VCPTh">https://goo.gl/3VCPTh</a>
           </AnimatedText2>
         </section>
-
-        <AnimatedLoader />
       </main>
     );
   }

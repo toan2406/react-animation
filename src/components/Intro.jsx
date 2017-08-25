@@ -1,8 +1,8 @@
 import React from 'react';
 import './intro.css';
 
-const Title = ({ style }) =>
-  <h1 className="intro-title" style={style}>
+const Title = ({ style, refFunc }) =>
+  <h1 className="intro-title" style={style} ref={refFunc}>
     RE-LLAX
   </h1>;
 

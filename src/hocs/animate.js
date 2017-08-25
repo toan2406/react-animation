@@ -7,7 +7,7 @@ const HIDDEN = { opacity: 0, pointerEvents: 'none' };
 // const HIDDEN = { display: 'none' };
 
 const animate = keyframes => BaseComponent =>
-  class extends Component {
+  class Animate extends Component {
     constructor(props) {
       super(props);
 
@@ -23,35 +23,23 @@ const animate = keyframes => BaseComponent =>
           WINDOW_WIDTH
         )
       }));
-
-      this.state = {
-        scrollTop: document.body.scrollTop
-      };
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      const thisScrollTop = this.state.scrollTop;
-      const start = first(this._keyframes).duration[0];
-      const end = last(this._keyframes).duration[1];
-      return (
-        nextState.scrollTop !== thisScrollTop &&
-        thisScrollTop >= start &&
-        thisScrollTop < end
-      );
+      return false;
     }
 
     componentDidMount() {
       window.requestAnimationFrame(() =>
-        draw(() =>
-          this.setState({
-            scrollTop: document.body.scrollTop
-          })
-        )
+        draw(() => {
+          const scrollTop = document.body.scrollTop;
+          const newStyle = this.calculateProps(scrollTop);
+          Object.assign(this.node.style, newStyle);
+        })
       );
     }
 
-    calculateProps() {
-      const scrollTop = this.state.scrollTop;
+    calculateProps(scrollTop) {
       const start = first(this._keyframes).duration[0];
       const end = last(this._keyframes).duration[1];
       let defaultProps = {
@@ -68,14 +56,9 @@ const animate = keyframes => BaseComponent =>
     }
 
     render() {
-      const { style, ...other } = this.props;
-      const animatedStyle = this.calculateProps();
       return BaseComponent({
-        ...other,
-        style: {
-          ...style,
-          ...animatedStyle
-        }
+        ...this.props,
+        refFunc: node => (this.node = node)
       });
     }
   };
@@ -180,6 +163,10 @@ const composeProps = (scrollTop, keyframe, props) => {
       case 'scaleX':
       case 'scaleY':
         result.transform += `${prop}(${newValue})`;
+        break;
+
+      case 'letterSpacing':
+        result.letterSpacing = `${newValue}px`;
         break;
 
       default:
