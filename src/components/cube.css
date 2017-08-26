@@ -17,6 +17,7 @@
   height: 26vmin;
   transform-style: preserve-3d;
   animation: rotate 15s linear infinite;
+  -webkit-animation: rotate 15s linear infinite;
 }
 
 .side {
@@ -84,5 +85,20 @@
   100% {
     transform: rotateY(45deg) rotate3d(-1, 0, 1, 54.7deg)
       rotate3d(1, 1, 1, 360deg);
+  }
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotateY(45deg) rotate3d(-1, 0, 1, 54.7deg)
+      rotate3d(1, 1, 1, 0deg);
+  }
+  50% {
+    -webkit-transform: rotateY(45deg) rotate3d(-1, 0, 1, 54.7deg)
+      rotate3d(1, 1, 1, -180deg);
+  }
+  100% {
+    -webkit-transform: rotateY(45deg) rotate3d(-1, 0, 1, 54.7deg)
+      rotate3d(1, 1, 1, -360deg);
   }
 }
