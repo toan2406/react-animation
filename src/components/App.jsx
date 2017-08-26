@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <main>
-        <AnimatedLoader />
+        {/* <AnimatedLoader /> */}
 
         <section>
           <AnimatedTitle1 style={{ color: 'rgba(255, 0, 255, .9)' }} />
