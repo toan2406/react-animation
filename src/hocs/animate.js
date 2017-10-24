@@ -32,7 +32,7 @@ const animate = keyframes => BaseComponent =>
     componentDidMount() {
       window.requestAnimationFrame(() =>
         draw(() => {
-          const scrollTop = document.body.scrollTop;
+          const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
           const newStyle = this.calculateProps(scrollTop);
           Object.assign(this.node.style, newStyle);
         })
