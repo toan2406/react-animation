@@ -44,7 +44,7 @@ const animate = keyframes => BaseComponent =>
       window.requestAnimationFrame(() =>
         draw(() =>
           this.setState({
-            scrollTop: document.body.scrollTop
+            scrollTop: document.documentElement.scrollTop || document.body.scrollTop
           })
         )
       );
